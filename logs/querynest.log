@@ -1,0 +1,544 @@
+2026-09-24 08:55:08,431 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1697 in, 74 out tokens, $0.00000, 3.5s
+2026-09-24 08:55:08,450 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS month, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 1
+2026-09-24 08:55:12,355 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2278 in, 80 out tokens, $0.00000, 3.8s
+2026-09-24 08:55:17,175 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2421 in, 84 out tokens, $0.00000, 4.8s
+2026-09-24 08:57:10,500 INFO    querynest.api: QueryNest API starting
+2026-09-24 08:57:21,904 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1695 in, 10 out tokens, $0.00000, 5.5s
+2026-09-24 08:57:25,016 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1790 in, 21 out tokens, $0.00000, 3.0s
+2026-09-24 08:57:28,766 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 3696 in, 66 out tokens, $0.00000, 3.7s
+2026-09-24 08:57:28,784 INFO    querynest.tools: SQL by manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY mname ORDER BY revenue DESC
+2026-09-24 08:57:32,847 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4164 in, 81 out tokens, $0.00000, 4.0s
+2026-09-24 08:57:36,635 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4309 in, 64 out tokens, $0.00000, 3.8s
+2026-09-24 08:57:40,716 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4436 in, 270 out tokens, $0.00000, 4.0s
+2026-09-24 08:58:04,762 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1472 in, 10 out tokens, $0.00000, 3.5s
+2026-09-24 08:58:07,865 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1530 in, 21 out tokens, $0.00000, 3.1s
+2026-09-24 08:58:12,248 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 3248 in, 145 out tokens, $0.00000, 4.3s
+2026-09-24 08:58:12,266 INFO    querynest.tools: SQL by sales12: SELECT customername, cmn, SUM(salesamt) AS revenue 
+FROM sales.invoices 
+WHERE cyyyy = 2025 
+AND customername IN (
+    SELECT customername 
+    FROM sales.invoices 
+    WHERE cyyyy = 2025 
+    GROUP BY customername 
+    ORDER BY SUM(salesamt) DESC 
+    LIMIT 10
+)
+GROUP BY customername, cmn
+ORDER BY customername, cmn
+2026-09-24 08:58:16,171 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4466 in, 58 out tokens, $0.00000, 3.9s
+2026-09-24 08:58:16,177 INFO    querynest.tools: SQL by sales12: SELECT SUM(costvalue) AS total_cost 
+FROM sales.invoices 
+WHERE cyyyy = 2025
+2026-09-24 08:58:16,178 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 08:58:21,138 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4561 in, 21 out tokens, $0.00000, 5.0s
+2026-09-24 08:58:22,615 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini error 503: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]
+2026-09-24 08:58:27,221 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 6279 in, 87 out tokens, $0.00000, 3.0s
+2026-09-24 08:58:28,653 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini error 503: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]
+2026-09-24 08:58:36,852 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 7414 in, 83 out tokens, $0.00000, 6.5s
+2026-09-24 09:00:38,702 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:00:40,732 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini error 503: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]
+2026-09-24 09:00:44,578 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1635 in, 73 out tokens, $0.00000, 3.8s
+2026-09-24 09:00:44,582 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 10
+2026-09-24 09:00:48,115 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2047 in, 303 out tokens, $0.00000, 3.5s
+2026-09-24 09:00:49,321 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:00:49,772 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:00:49,900 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:00:49,928 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:00:49,929 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:00:49,930 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:00:49,939 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:00:49,957 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:00:50,979 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:00:50,983 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 260, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:00:51,015 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:00:51,076 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:00:51,077 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:00:51,078 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:00:51,078 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:00:51,132 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:00:51,146 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 260, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.SyntaxError: unterminated quoted string at or near "'"
+LINE 1: ...n, customerid, totqty FROM sales.invoices WHERE salesmna = '
+                                                                      ^
+2026-09-24 09:00:51,300 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:00:51,301 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:00:51,303 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:00:51,303 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:00:51,303 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:00:51,303 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:00:51,305 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:00:51,306 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:00:51,308 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:00:51,311 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:00:51,311 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:01:30,974 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:01:31,195 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:31,199 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:01:31,219 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:31,230 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:31,479 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:01:31,861 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:01:31,966 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:01:31,990 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:01:31,991 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:01:31,991 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:01:32,005 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:01:32,024 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:01:33,046 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:01:33,050 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 260, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:01:33,070 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:01:33,126 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:01:33,127 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:01:33,127 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:01:33,128 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:01:33,179 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:01:33,364 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:01:33,365 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:33,367 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:01:33,367 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:01:33,368 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:01:33,368 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:33,371 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:01:33,371 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:33,373 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:01:33,376 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:01:33,377 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:04:56,416 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:10:41,415 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:11:18,043 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1697 in, 10 out tokens, $0.00000, 4.3s
+2026-09-24 09:11:21,863 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1792 in, 21 out tokens, $0.00000, 3.7s
+2026-09-24 09:11:26,258 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 3698 in, 66 out tokens, $0.00000, 4.3s
+2026-09-24 09:11:26,271 INFO    querynest.tools: SQL by manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY mname ORDER BY revenue DESC
+2026-09-24 09:11:29,443 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4162 in, 79 out tokens, $0.00000, 3.1s
+2026-09-24 09:11:30,808 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini error 503: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]
+2026-09-24 09:11:36,796 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4306 in, 148 out tokens, $0.00000, 4.2s
+2026-09-24 09:12:54,406 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1543 in, 10 out tokens, $0.00000, 2.5s
+2026-09-24 09:13:00,663 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1601 in, 21 out tokens, $0.00000, 6.2s
+2026-09-24 09:13:04,887 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 3319 in, 144 out tokens, $0.00000, 4.2s
+2026-09-24 09:13:04,906 INFO    querynest.tools: SQL by sales12: SELECT 
+  mname AS category, 
+  CASE 
+    WHEN cmn BETWEEN 1 AND 3 THEN 'Q1'
+    WHEN cmn BETWEEN 4 AND 6 THEN 'Q2'
+    WHEN cmn BETWEEN 7 AND 9 THEN 'Q3'
+    ELSE 'Q4'
+  END AS quarter,
+  SUM(salesamt) AS revenue 
+FROM sales.invoices 
+WHERE cyyyy = 2025 
+GROUP BY 1, 2
+2026-09-24 09:13:08,413 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 3958 in, 77 out tokens, $0.00000, 3.5s
+2026-09-24 09:13:20,603 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4098 in, 83 out tokens, $0.00000, 12.2s
+2026-09-24 09:13:22,463 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini error 503: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]
+2026-09-24 09:13:36,849 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 4531 in, 105 out tokens, $0.00000, 13.4s
+2026-09-24 09:14:31,214 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:14:31,475 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:31,479 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:14:31,501 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:31,514 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:31,775 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:14:32,176 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:14:32,284 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:14:32,313 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:14:32,315 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:14:32,315 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:14:32,327 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:14:32,358 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:14:33,388 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:14:33,393 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 260, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:14:33,403 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:14:33,461 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:14:33,462 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:14:33,462 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:14:33,463 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:14:33,527 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:14:33,731 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:14:33,731 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:33,735 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:14:33,735 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:14:33,735 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:14:33,735 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:33,738 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:14:33,738 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:33,742 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:14:33,747 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:14:33,748 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:16:09,169 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:16:09,431 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:09,436 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:16:09,457 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:09,469 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:09,732 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:16:10,139 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:10,235 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:16:10,263 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:16:10,263 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:16:10,264 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:10,280 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:16:10,310 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:16:11,328 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:16:11,333 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 260, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:16:11,339 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:16:11,402 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:16:11,403 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:16:11,403 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:16:11,404 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:16:11,462 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:11,675 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:16:11,676 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:11,679 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:16:11,679 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:16:11,680 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:16:11,680 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:11,684 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:16:11,685 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:11,687 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:16:11,691 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:11,692 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:16:53,479 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:16:53,723 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:53,728 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:16:53,750 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:53,763 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:54,023 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:16:54,434 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:54,544 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:16:54,572 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:16:54,573 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:16:54,574 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:54,590 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:16:54,609 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:16:55,630 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:16:55,635 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 262, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:16:55,654 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:16:55,710 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:16:55,712 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:16:55,712 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:16:55,713 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:16:55,773 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:16:55,987 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:16:55,988 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:55,991 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:16:55,991 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:16:55,991 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:16:55,991 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:55,994 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:16:55,994 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:55,997 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:16:56,000 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:16:56,001 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:45:31,422 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:45:31,519 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:31,520 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:45:31,529 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:31,533 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:31,631 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:45:31,809 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:45:31,849 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:45:31,864 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:45:31,864 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:45:31,864 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:45:31,868 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:45:31,882 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:45:32,892 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:45:32,894 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 294, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:45:32,898 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:45:32,921 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:45:32,921 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:45:32,921 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:45:32,922 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:45:32,943 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:45:33,013 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:45:33,013 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,014 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:45:33,014 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:45:33,014 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:45:33,014 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,015 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:45:33,015 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,017 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:45:33,018 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,018 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:45:33,104 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,106 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:45:33,117 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,130 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,131 INFO    querynest.tools: SQL by system:manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC LIMIT 3
+2026-09-24 09:45:33,139 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,153 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,155 INFO    querynest.agent: fast path declined: {'mode': 'agent'}
+2026-09-24 09:45:33,157 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,158 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:45:33,166 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,179 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,181 INFO    querynest.agent: fast path declined: None
+2026-09-24 09:45:33,183 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,184 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:45:33,191 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,204 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,205 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:45:33,206 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:45:33,209 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,210 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:45:33,218 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,231 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,233 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:45:33,240 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:33,242 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:45:52,864 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1259 in, 68 out tokens, $0.00000, 4.9s
+2026-09-24 09:45:52,881 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY mname ORDER BY revenue DESC
+2026-09-24 09:45:57,299 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 580 in, 174 out tokens, $0.00000, 4.4s
+2026-09-24 09:46:00,893 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 137 in, 43 out tokens, $0.00000, 3.6s
+2026-09-24 09:48:27,291 WARNING querynest.llm: LLM gemini attempt 1 failed: gemini connection error: Request timed out.
+2026-09-24 09:48:31,597 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1103 in, 6 out tokens, $0.00000, 3.2s
+2026-09-24 09:48:31,615 INFO    querynest.agent: fast path declined: {'mode': 'agent'}
+2026-09-24 09:48:34,854 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2375 in, 20 out tokens, $0.00000, 3.2s
+2026-09-24 09:48:39,027 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2465 in, 73 out tokens, $0.00000, 4.2s
+2026-09-24 09:48:42,167 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 79 in, 24 out tokens, $0.00000, 3.1s
+2026-09-24 09:48:57,048 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:49:08,174 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1275 in, 79 out tokens, $0.00000, 3.3s
+2026-09-24 09:49:08,191 INFO    querynest.tools: SQL by manager: SELECT CAST(DATE_TRUNC('MONTH', docdt) AS DATE) AS month, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 1
+2026-09-24 09:50:49,853 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 682 in, 159 out tokens, $0.00000, 101.6s
+2026-09-24 09:50:53,366 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 85 in, 6 out tokens, $0.00000, 3.5s
+2026-09-24 09:51:36,522 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:51:36,630 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:36,632 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 09:51:36,640 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:36,644 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:36,750 INFO    querynest.api: QueryNest API starting
+2026-09-24 09:51:36,941 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:51:37,006 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 09:51:37,020 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:51:37,020 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:51:37,020 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:51:37,024 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 09:51:37,039 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 09:51:38,050 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 09:51:38,052 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 294, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 09:51:38,068 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 09:51:38,091 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 09:51:38,092 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 09:51:38,092 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 09:51:38,092 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 09:51:38,114 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 09:51:38,184 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:51:38,185 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,186 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:51:38,186 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 09:51:38,186 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 09:51:38,186 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,187 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 09:51:38,187 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,188 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 09:51:38,189 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,190 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 09:51:38,280 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,281 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:51:38,292 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,306 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,308 INFO    querynest.tools: SQL by system:manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC LIMIT 3
+2026-09-24 09:51:38,317 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,331 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,332 INFO    querynest.agent: fast path declined: {'mode': 'agent'}
+2026-09-24 09:51:38,334 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,337 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:51:38,344 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,358 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,359 INFO    querynest.agent: fast path declined: None
+2026-09-24 09:51:38,361 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,362 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:51:38,370 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,382 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,383 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 09:51:38,384 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 09:51:38,386 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,388 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:51:38,395 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,409 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,410 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 09:51:38,417 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 09:51:38,418 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 10:04:27,674 INFO    querynest.api: QueryNest API starting
+2026-09-24 11:35:05,177 INFO    querynest.api: QueryNest API starting
+2026-09-24 11:37:05,709 INFO    querynest.api: QueryNest API starting
+2026-09-24 11:40:23,704 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 975 in, 6 out tokens, $0.00000, 3.0s
+2026-09-24 11:40:23,708 INFO    querynest.agent: fast path declined: {'mode': 'agent'}
+2026-09-24 11:40:27,018 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 2247 in, 88 out tokens, $0.00000, 3.3s
+2026-09-24 11:40:28,929 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 72 in, 21 out tokens, $0.00000, 1.9s
+2026-09-24 11:40:45,133 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 1336 in, 80 out tokens, $0.00000, 3.4s
+2026-09-24 11:40:45,148 INFO    querynest.tools: SQL by admin: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cmn BETWEEN 4 AND 6 AND cyyyy = 2026 GROUP BY mname ORDER BY revenue DESC LIMIT 1
+2026-09-24 11:40:50,006 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 375 in, 55 out tokens, $0.00000, 4.8s
+2026-09-24 11:40:53,099 INFO    querynest.llm: LLM gemini/gemini-3.1-flash-lite: 84 in, 16 out tokens, $0.00000, 3.1s
+2026-09-24 11:43:46,620 INFO    querynest.api: QueryNest API starting
+2026-09-24 11:43:46,723 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:46,725 INFO    querynest.tools: SQL by manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY customername ORDER BY revenue DESC LIMIT 3
+2026-09-24 11:43:46,733 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:46,738 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:46,851 INFO    querynest.api: QueryNest API starting
+2026-09-24 11:43:47,056 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 11:43:47,099 INFO    querynest.tools: SQL by system:manager: SELECT date_trunc('month', docdt)::date AS m, SUM(salesamt) FILTER (WHERE cyyyy = 2025) AS s FROM sales.invoices GROUP BY 1 ORDER BY 1 DESC LIMIT 3
+2026-09-24 11:43:47,115 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 11:43:47,115 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 11:43:47,115 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 11:43:47,120 INFO    querynest.tools: SQL by system:manager: SELECT docid FROM sales.invoices
+2026-09-24 11:43:47,135 INFO    querynest.tools: SQL by system:manager: SELECT COUNT(*) FROM sales.account_entries a CROSS JOIN sales.account_entries b
+2026-09-24 11:43:48,150 INFO    querynest.tools: SQL by system:manager: SELECT no_such_column FROM sales.invoices
+2026-09-24 11:43:48,154 ERROR   querynest.tools: tool run_sql_query failed
+Traceback (most recent call last):
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 294, in run_tool
+    return tool.run(args, ctx)
+           ~~~~~~~~^^^^^^^^^^^
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\tools.py", line 109, in run_sql_query
+    data = fetch_all(checked.sql, None, ctx.user, max_rows=settings.max_query_rows)
+  File "D:\AI-Learnings\Agent-Backend\src\querynest\db.py", line 51, in fetch_all
+    cur = conn.execute(query, params)
+  File "D:\AI-Learnings\Agent-Backend\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "no_such_column" does not exist
+LINE 1: SELECT no_such_column FROM sales.invoices LIMIT 1000
+               ^
+2026-09-24 11:43:48,159 INFO    querynest.tools: SQL by t-sales: SELECT DISTINCT salesmna FROM sales.invoices
+2026-09-24 11:43:48,189 INFO    querynest.tools: SQL by t-sales: SELECT COUNT(*) FROM sales.account_entries
+2026-09-24 11:43:48,190 INFO    querynest.tools: BLOCKED: You don't have access to table sales.account_entries. Available: ['sales.invoices'].
+2026-09-24 11:43:48,190 INFO    querynest.tools: SQL by t-sales: SELECT SUM(costvalue) FROM sales.invoices
+2026-09-24 11:43:48,190 INFO    querynest.tools: BLOCKED: Column 'costvalue' is not available to you.
+2026-09-24 11:43:48,216 INFO    querynest.tools: SQL by t-nobody: SELECT COUNT(*) AS n FROM sales.invoices
+2026-09-24 11:43:48,315 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 11:43:48,315 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,316 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 11:43:48,316 WARNING querynest.llm: LLM first attempt 2 failed: fake failure
+2026-09-24 11:43:48,317 WARNING querynest.llm: LLM first attempt 3 failed: fake failure
+2026-09-24 11:43:48,317 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,318 WARNING querynest.llm: LLM first attempt 1 failed: fake failure
+2026-09-24 11:43:48,318 INFO    querynest.llm: LLM second/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,320 WARNING querynest.llm: LLM fake attempt 1 failed: fake failure
+2026-09-24 11:43:48,321 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,321 INFO    querynest.llm: LLM cache hit (fake)
+2026-09-24 11:43:48,445 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,446 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 11:43:48,459 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,476 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,477 INFO    querynest.tools: SQL by system:manager: SELECT customername, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC LIMIT 3
+2026-09-24 11:43:48,486 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,500 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,502 INFO    querynest.agent: fast path declined: {'mode': 'agent'}
+2026-09-24 11:43:48,504 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,506 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 11:43:48,513 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,527 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,529 INFO    querynest.agent: fast path declined: None
+2026-09-24 11:43:48,531 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,532 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 11:43:48,541 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,556 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,558 INFO    querynest.tools: SQL by system:manager: DELETE FROM sales.invoices
+2026-09-24 11:43:48,558 INFO    querynest.tools: BLOCKED: Only SELECT queries are allowed (got DELETE).
+2026-09-24 11:43:48,561 INFO    querynest.llm: LLM fake/fake-model: 100 in, 10 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,563 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 11:43:48,570 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,600 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,601 INFO    querynest.tools: SQL by system:manager: SELECT mname AS category, SUM(salesamt) AS revenue FROM sales.invoices WHERE cyyyy = 2025 GROUP BY 1 ORDER BY 2 DESC
+2026-09-24 11:43:48,609 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s
+2026-09-24 11:43:48,610 INFO    querynest.llm: LLM fake/fake-model: 100 in, 20 out tokens, $0.00000, 0.0s

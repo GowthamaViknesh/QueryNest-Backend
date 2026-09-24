@@ -1,0 +1,24 @@
+{
+  "sales_pivot": {
+    "title": "Sales pivot: category by year",
+    "description": "Revenue and quantity per sales category and year, with branch and salesman filters. Real Excel PivotTable (drag fields to re-arrange).",
+    "sql": "SELECT mname AS category, branchcode AS branch, salesmna AS salesman, customername AS customer, brandname AS brand, cyyyy AS year, cmn AS month, salesamt AS revenue, totqty AS quantity FROM sales.invoices",
+    "pivot": {
+      "rows": ["category"],
+      "columns": ["year"],
+      "filters": ["branch", "salesman"],
+      "values": [{"field": "revenue", "agg": "sum"}]
+    }
+  },
+  "ledger_pivot": {
+    "title": "Ledger pivot: account by year",
+    "description": "Debit and credit per ledger account and year (e.g. VAT, sales accounts). Real Excel PivotTable.",
+    "sql": "SELECT accountname AS account, EXTRACT(YEAR FROM vchdt)::int AS year, dramount AS debit, cramount AS credit FROM sales.account_entries",
+    "pivot": {
+      "rows": ["account"],
+      "columns": ["year"],
+      "filters": [],
+      "values": [{"field": "credit", "agg": "sum"}, {"field": "debit", "agg": "sum"}]
+    }
+  }
+}

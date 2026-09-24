@@ -1,0 +1,51 @@
+[project]
+name = "querynest"
+version = "0.1.0"
+description = "QueryNest: chat with your database - answers, reports, charts, pivots and Excel"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.20.0",
+    "anthropic>=1.8.0",
+    "fastapi>=0.141.1",
+    "mcp>=2.2.0",
+    "openai>=3.19.0",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.6",
+    "psycopg-pool>=3.3.3",
+    "psycopg[binary]>=3.3.6",
+    "pwdlib[argon2]>=0.3.1",
+    "pydantic-settings>=2.15.0",
+    "pyjwt>=2.15.0",
+    "sqlalchemy>=2.0.54",
+    "sqlglot>=30.19.0",
+    "uvicorn[standard]>=0.53.0",
+    "xlsxwriter>=3.2.9",
+]
+
+[project.scripts]
+querynest-check = "querynest:main"
+agent = "querynest.agent:main"
+load-excel = "querynest.load_excel:main"
+setup-db = "querynest.setup_db:main"
+migrate = "querynest.cli:migrate"
+seed = "querynest.cli:seed"
+create-user = "querynest.cli:create_user"
+bootstrap = "querynest.cli:bootstrap"
+make-templates = "querynest.cli:make_templates"
+api = "querynest.api:run"
+querynest-mcp = "querynest.mcp_server:main"
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Cache is on C:, project on D:, so hardlinks are impossible; copy silently instead.
+link-mode = "copy"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pywin32>=312",
+]

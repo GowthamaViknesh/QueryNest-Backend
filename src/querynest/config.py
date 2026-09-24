@@ -1,0 +1,154 @@
+"""App settings, read from environment variables and the .env file.
+
+Like @nestjs/config: one typed object that holds all configuration.
+Secrets are SecretStr, so printing settings shows '**********', never the real value.
+Every field can be overridden in .env using its UPPERCASE name, e.g. MAX_QUERY_ROWS=500.
+"""
+
+from pathlib import Path
+
+from pydantic import SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Agent-Backend/.env, found relative to this file so it works from any working directory.
+# (this file is Agent-Backend/src/querynest/config.py -> parents[2] is Agent-Backend)
+BACKEND_DIR = Path(__file__).resolve().parents[2]
+ENV_FILE = BACKEND_DIR / ".env"
+
+
+class Settings(BaseSettings):
+    # Read Agent-Backend/.env; real environment variables win over it.
+    # Field names match env var names case-insensitively: gemini_api_key <- GEMINI_API_KEY
+    model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
+
+    # ------------------------------------------------------------------ LLM providers (M3)
+    # A provider is used only if it is configured (key set / enabled). PROVIDER_ORDER is the
+    # fallback chain: if one fails (overloaded, rate-limited, down), the next one answers.
+    provider_order: list[str] = ["claude", "gemini", "openai", "grok", "ollama"]
+
+    anthropic_api_key: SecretStr | None = None
+    claude_model: str = "claude-sonnet-5"
+
+    gemini_api_key: SecretStr | None = None
+    # flash-lite: higher free-tier limits (3.8-flash allows only 20 requests/day, 3.5-flash 5/min)
+    gemini_model: str = "gemini-3.1-flash-lite"
+    gemini_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
+
+    openai_api_key: SecretStr | None = None
+    openai_model: str | None = None  # set together with the key, e.g. OPENAI_MODEL=...
+    openai_base_url: str | None = None  # None = api.openai.com
+
+    grok_api_key: SecretStr | None = None
+    grok_model: str | None = None
+    grok_base_url: str = "https://api.x.ai/v1"
+
+    # Local model through Ollama (OpenAI-compatible API). Data never leaves the machine.
+    ollama_enabled: bool = False
+    ollama_base_url: str = "http://localhost:11434/v1"
+    ollama_model: str = "qwen3"
+
+    llm_max_tokens: int = 16000
+    llm_max_retries: int = 2  # retries per provider before falling back to the next one
+    llm_retry_max_wait_s: float = 20.0
+    llm_timeout_s: float = 120.0
+    llm_cache_ttl_s: int = 3600  # identical LLM requests within this window are served from cache
+    llm_cache_size: int = 256
+    # USD per 1M tokens: [input, output]. Unlisted models count as 0 (e.g. free tiers, local).
+    model_prices: dict[str, list[float]] = {
+        "claude-sonnet-5": [2.0, 10.0],
+        "claude-opus-5": [5.0, 25.0],
+        "claude-opus-5-5": [4.0, 20.0],
+        "claude-haiku-4-5": [1.0, 5.0],
+    }
+
+    # ------------------------------------------------------------------ Postgres
+    postgres_host: str = "localhost"
+    postgres_port: int = 5432
+    postgres_user: str = "postgres"
+    postgres_password: SecretStr
+    postgres_db: str = "agent_database"
+    postgres_sslmode: str = "prefer"
+
+    # Read-only login the agent uses (created by `uv run setup-db`)
+    agent_db_user: str = "agent_reader"
+    agent_db_password: SecretStr | None = None
+    # Login the API uses for its own tables (schema "app": users, chats, audit, knowledge)
+    app_db_user: str = "querynest_app"
+    app_db_password: SecretStr | None = None
+
+    # Replace real customer/salesman names with fake labels when loading Excel
+    anonymize_data: bool = True
+
+    # ------------------------------------------------------------------ Guardrails (M2)
+    allowed_schemas: list[str] = ["sales"]  # only tables in these schemas can be queried
+    max_query_rows: int = 1000  # LIMIT forced onto every agent query
+    llm_result_rows: int = 50  # rows of a result sent to the LLM (the rest stay server-side)
+    describe_sample_rows: int = 3  # sample rows describe_table shows the LLM (0 = none)
+    statement_timeout_ms: int = 15000  # Postgres cancels agent queries running longer
+    max_rounds: int = 10  # max LLM calls per question
+    max_tool_calls: int = 20  # max tool calls per question
+    max_question_chars: int = 2000
+
+    # ------------------------------------------------------------------ Speed + quality (SQLBot ideas)
+    fast_path: bool = True  # one planning call returns the SQL; full agent only when needed
+    schema_top_k: int = 5  # tables whose schema is put straight into the prompt
+    schema_cache_s: int = 300  # how long a role's table list is cached
+    suggest_followups: bool = True  # 3 follow-up question chips after each answer
+    report_max_rows: int = 50000  # row limit for template reports (fixed, admin-written SQL)
+
+    # ------------------------------------------------------------------ API, users, limits
+    jwt_secret: SecretStr | None = None  # generated by `uv run setup-db`
+    jwt_expire_minutes: int = 480
+    cors_origins: list[str] = ["http://localhost:5173"]
+    questions_per_user_per_day: int = 200
+    requests_per_minute: int = 30
+    login_attempts_per_minute: int = 5
+    demo_password: SecretStr | None = None  # generated by `uv run seed` for demo users
+    history_turns: int = 6  # previous Q&A pairs the LLM sees in a conversation
+
+    # ------------------------------------------------------------------ Privacy (M11)
+    # Before data goes to a CLOUD model, values in these columns are replaced by tokens
+    # like [P1]; the real values are put back in the answer shown to the user.
+    mask_cloud_data: bool = True
+    sensitive_columns: list[str] = ["customername", "subledger", "salesmna", "customercode", "refno"]
+
+    # ------------------------------------------------------------------ Reports, MCP, misc
+    company_name: str = "QueryNest"
+    report_color: str = "#1F4E79"
+    mcp_role: str = "manager"  # permissions used by the MCP server
+    log_dir: Path = BACKEND_DIR / "logs"
+    frontend_dist: Path = BACKEND_DIR.parent / "Agent-Frontend" / "dist"
+
+    def postgres_conninfo(self, dbname: str | None = None) -> dict[str, object]:
+        """Admin connection (the postgres superuser): only for setup scripts, never the agent."""
+        return self._conninfo(self.postgres_user, self.postgres_password, dbname)
+
+    def agent_conninfo(self) -> dict[str, object]:
+        """Read-only connection the agent's tools use."""
+        if self.agent_db_password is None:
+            raise RuntimeError("AGENT_DB_PASSWORD missing in .env. Run `uv run setup-db` first.")
+        return self._conninfo(self.agent_db_user, self.agent_db_password, None)
+
+    def app_db_url(self) -> str:
+        """SQLAlchemy URL for the API's own tables."""
+        if self.app_db_password is None:
+            raise RuntimeError("APP_DB_PASSWORD missing in .env. Run `uv run setup-db` first.")
+        from urllib.parse import quote
+
+        return (
+            f"postgresql+psycopg://{self.app_db_user}:{quote(self.app_db_password.get_secret_value())}"
+            f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}?sslmode={self.postgres_sslmode}"
+        )
+
+    def _conninfo(self, user: str, password: SecretStr, dbname: str | None) -> dict[str, object]:
+        return {
+            "host": self.postgres_host,
+            "port": self.postgres_port,
+            "user": user,
+            "password": password.get_secret_value(),
+            "dbname": dbname or self.postgres_db,
+            "sslmode": self.postgres_sslmode,
+        }
+
+
+settings = Settings()
